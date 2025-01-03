@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a Mi Página Simple</h1>
+    <button onclick="displayContent('texto1')">Mostrar Texto 1</button>
+    <button onclick="displayContent('texto2')">Mostrar Texto 2</button>
+    <button onclick="displayContent('imagenes')">Mostrar Imágenes</button>
+    <div class="content" id="content">
+        <!-- El contenido se mostrará aquí -->
+    </div>
+
+    <script>
+        function displayContent(type) {
+            const contentDiv = document.getElementById('content');
+            if (type === 'texto1') {
+                contentDiv.innerHTML = '<p>Este es el Texto 1.</p>';
+            } else if (type === 'texto2') {
+                contentDiv.innerHTML = '<p>Este es el Texto 2.</p>';
+            } else if (type === 'imagenes') {
+                contentDiv.innerHTML = '<img src="https://via.placeholder.com/100" alt="Imagen 1">' +
+                                       '<img src="https://via.placeholder.com/100" alt="Imagen 2">';
+            }
+        }
+    </script>
+</body>
+</html>
