@@ -1,51 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Simple</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
-        .content {
-            margin-top: 20px;
-        }
-        button {
-            margin: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        img {
-            width: 100px;
-            height: 100px;
-            margin: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hoja de Personaje D&D 5e</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #f0e6d2;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .field-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .field {
+      flex: 1 1 150px;
+      display: flex;
+      flex-direction: column;
+    }
+    .field label {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+    .field input, .field textarea {
+      padding: 6px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    textarea {
+      resize: vertical;
+    }
+  </style>
 </head>
 <body>
-    <h1>Bienvenido a Mi Página Simple</h1>
-    <button onclick="displayContent('texto1')">Mostrar Texto 1</button>
-    <button onclick="displayContent('texto2')">Mostrar Texto 2</button>
-    <button onclick="displayContent('imagenes')">Mostrar Imágenes</button>
-    <div class="content" id="content">
-        <!-- El contenido se mostrará aquí -->
-    </div>
 
-    <script>
-        function displayContent(type) {
-            const contentDiv = document.getElementById('content');
-            if (type === 'texto1') {
-                contentDiv.innerHTML = '<p>Este es el Texto 1.</p>';
-            } else if (type === 'texto2') {
-                contentDiv.innerHTML = '<p>Este es el Texto 2.</p>';
-            } else if (type === 'imagenes') {
-                contentDiv.innerHTML = '<img src="https://via.placeholder.com/100" alt="Imagen 1">' +
-                                       '<img src="https://via.placeholder.com/100" alt="Imagen 2">';
-            }
-        }
-    </script>
+  <h1>Hoja de Personaje D&D 5e</h1>
+
+  <!-- Datos básicos -->
+  <div class="card">
+    <div class="field-group">
+      <div class="field">
+        <label>Nombre</label>
+        <input type="text" placeholder="Ej. Elendil">
+      </div>
+      <div class="field">
+        <label>Raza</label>
+        <input type="text" placeholder="Ej. Elfo">
+      </div>
+      <div class="field">
+        <label>Clase</label>
+        <input type="text" placeholder="Ej. Guerrero">
+      </div>
+      <div class="field">
+        <label>Nivel</label>
+        <input type="number" min="1" max="20" value="1">
+      </div>
+    </div>
+  </div>
+
+  <!-- Atributos -->
+  <div class="card">
+    <h2>Atributos</h2>
+    <div class="field-group">
+      <div class="field"><label>Fuerza</label><input type="number" value="10"></div>
+      <div class="field"><label>Destreza</label><input type="number" value="10"></div>
+      <div class="field"><label>Constitución</label><input type="number" value="10"></div>
+      <div class="field"><label>Inteligencia</label><input type="number" value="10"></div>
+      <div class="field"><label>Sabiduría</label><input type="number" value="10"></div>
+      <div class="field"><label>Carisma</label><input type="number" value="10"></div>
+    </div>
+  </div>
+
+  <!-- Conjuros -->
+  <div class="card">
+    <h2>Conjuros</h2>
+    <div class="field">
+      <label>Lista de Conjuros</label>
+      <textarea rows="6" placeholder="Anota aquí los conjuros preparados o aprendidos..."></textarea>
+    </div>
+  </div>
+
+  <!-- Inventario -->
+  <div class="card">
+    <h2>Equipo e Inventario</h2>
+    <div class="field">
+      <label>Armas y Objetos</label>
+      <textarea rows="6" placeholder="Espada larga, escudo, mochila, antorchas..."></textarea>
+    </div>
+  </div>
+
 </body>
 </html>
