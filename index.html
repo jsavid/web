@@ -1,66 +1,163 @@
-<script>
-  // Guardar y cargar datos
-  const fields = [
-    "portraitUrl", "nombre", "raza", "claseNivel", "alineamiento",
-    "caracteristicas", "habilidades", "inventario", "hechizos"
-  ];
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hoja de Personaje D&D</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f1ec;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
 
-  // Obtener referencias
-  const portraitInput = document.querySelector('input[placeholder="Pega aquí una URL de imagen"]');
-  const nombreInput = document.querySelector('input[placeholder="Ej. Aeris Nightshade"]');
-  const razaInput = document.querySelector('input[placeholder="Ej. Elfo oscuro"]');
-  const claseNivelInput = document.querySelector('input[placeholder="Ej. Hechicero 5"]');
-  const alineamientoInput = document.querySelector('input[placeholder="Ej. Caótico Bueno"]');
-  const caracteristicasInput = document.querySelector('textarea[placeholder^="FUE"]');
-  const habilidadesInput = document.querySelector('textarea[placeholder^="Visión"]');
-  const inventarioInput = document.querySelector('textarea[placeholder^="Espada"]');
-  const hechizosInput = document.querySelector('textarea[placeholder^="Prestidigitación"]');
-  const portraitDiv = document.getElementById('portrait');
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
 
-  // Cargar datos
-  window.onload = function() {
-    portraitInput.value = localStorage.getItem(fields[0]) || "";
-    nombreInput.value = localStorage.getItem(fields[1]) || "";
-    razaInput.value = localStorage.getItem(fields[2]) || "";
-    claseNivelInput.value = localStorage.getItem(fields[3]) || "";
-    alineamientoInput.value = localStorage.getItem(fields[4]) || "";
-    caracteristicasInput.value = localStorage.getItem(fields[5]) || "";
-    habilidadesInput.value = localStorage.getItem(fields[6]) || "";
-    inventarioInput.value = localStorage.getItem(fields[7]) || "";
-    hechizosInput.value = localStorage.getItem(fields[8]) || "";
+    h1 {
+      text-align: center;
+      color: #5a1a1a;
+      margin-bottom: 30px;
+    }
 
-    if (portraitInput.value) updateImage(portraitInput.value);
-  };
+    #portrait {
+      width: 200px;
+      height: 200px;
+      background-image: url('img/hechicero.png');
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      margin: 0 auto 20px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
 
-  // Guardar datos al cambiar
-  [portraitInput, nombreInput, razaInput, claseNivelInput, alineamientoInput,
-   caracteristicasInput, habilidadesInput, inventarioInput, hechizosInput].forEach((el, i) => {
-    el.addEventListener('input', () => {
-      localStorage.setItem(fields[i], el.value);
-      if (i === 0) updateImage(el.value);
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+      color: #444;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hoja de Personaje D&D</h1>
+    <div id="portrait"></div>
+    <label>URL del retrato</label>
+    <input type="text" placeholder="Pega aquí una URL de imagen">
+
+    <label>Nombre</label>
+    <input type="text" placeholder="Ej. Aeris Nightshade">
+
+    <label>Raza</label>
+    <input type="text" placeholder="Ej. Elfo oscuro">
+
+    <label>Clase y Nivel</label>
+    <input type="text" placeholder="Ej. Hechicero 5">
+
+    <label>Alineamiento</label>
+    <input type="text" placeholder="Ej. Caótico Bueno">
+
+    <label>Características</label>
+    <textarea placeholder="FUE: 14, DES: 16, CON: 12, INT: 18, SAB: 10, CAR: 17"></textarea>
+
+    <label>Habilidades especiales</label>
+    <textarea placeholder="Visión en la oscuridad, Sentidos agudos..."></textarea>
+
+    <label>Inventario</label>
+    <textarea placeholder="Espada corta, grimorio, antorchas..."></textarea>
+
+    <label>Hechizos</label>
+    <textarea placeholder="Prestidigitación, Bola de fuego..."></textarea>
+  </div>
+
+  <script>
+    // Guardar y cargar datos
+    const fields = [
+      "portraitUrl", "nombre", "raza", "claseNivel", "alineamiento",
+      "caracteristicas", "habilidades", "inventario", "hechizos"
+    ];
+
+    // Obtener referencias
+    const portraitInput = document.querySelector('input[placeholder="Pega aquí una URL de imagen"]');
+    const nombreInput = document.querySelector('input[placeholder="Ej. Aeris Nightshade"]');
+    const razaInput = document.querySelector('input[placeholder="Ej. Elfo oscuro"]');
+    const claseNivelInput = document.querySelector('input[placeholder="Ej. Hechicero 5"]');
+    const alineamientoInput = document.querySelector('input[placeholder="Ej. Caótico Bueno"]');
+    const caracteristicasInput = document.querySelector('textarea[placeholder^="FUE"]');
+    const habilidadesInput = document.querySelector('textarea[placeholder^="Visión"]');
+    const inventarioInput = document.querySelector('textarea[placeholder^="Espada"]');
+    const hechizosInput = document.querySelector('textarea[placeholder^="Prestidigitación"]');
+    const portraitDiv = document.getElementById('portrait');
+
+    // Cargar datos
+    window.onload = function() {
+      portraitInput.value = localStorage.getItem(fields[0]) || "";
+      nombreInput.value = localStorage.getItem(fields[1]) || "";
+      razaInput.value = localStorage.getItem(fields[2]) || "";
+      claseNivelInput.value = localStorage.getItem(fields[3]) || "";
+      alineamientoInput.value = localStorage.getItem(fields[4]) || "";
+      caracteristicasInput.value = localStorage.getItem(fields[5]) || "";
+      habilidadesInput.value = localStorage.getItem(fields[6]) || "";
+      inventarioInput.value = localStorage.getItem(fields[7]) || "";
+      hechizosInput.value = localStorage.getItem(fields[8]) || "";
+
+      if (portraitInput.value) updateImage(portraitInput.value);
+    };
+
+    // Guardar datos al cambiar
+    [portraitInput, nombreInput, razaInput, claseNivelInput, alineamientoInput,
+     caracteristicasInput, habilidadesInput, inventarioInput, hechizosInput].forEach((el, i) => {
+      el.addEventListener('input', () => {
+        localStorage.setItem(fields[i], el.value);
+        if (i === 0) updateImage(el.value);
+      });
     });
-  });
 
-  // Validación de imagen
-  function updateImage(url) {
-    if (!url) {
-      portraitDiv.style.backgroundImage = "url('img/hechicero.png')";
-      return;
+    // Validación de imagen
+    function updateImage(url) {
+      if (!url) {
+        portraitDiv.style.backgroundImage = "url('img/hechicero.png')";
+        return;
+      }
+      // Validar formato básico de URL de imagen
+      if (/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp)$/i.test(url)) {
+        portraitDiv.style.backgroundImage = `url('${url}')`;
+        portraitInput.setCustomValidity("");
+      } else {
+        portraitDiv.style.backgroundImage = "url('img/hechicero.png')";
+        portraitInput.setCustomValidity("URL inválida. Debe terminar en jpg, png, gif o webp.");
+      }
     }
-    // Validar formato básico de URL de imagen
-    if (/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp)$/i.test(url)) {
-      portraitDiv.style.backgroundImage = `url('${url}')`;
-      portraitInput.setCustomValidity("");
-    } else {
-      portraitDiv.style.backgroundImage = "url('img/hechicero.png')";
-      portraitInput.setCustomValidity("URL inválida. Debe terminar en jpg, png, gif o webp.");
-    }
-  }
 
-  // Botón imprimir
-  const printBtn = document.createElement('button');
-  printBtn.textContent = "Imprimir hoja";
-  printBtn.style = "margin: 20px auto; display: block; background: #7b2c2c; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 1.1em; cursor: pointer;";
-  printBtn.onclick = () => window.print();
-  document.querySelector('.container').appendChild(printBtn);
-</script>
+    // Botón imprimir
+    const printBtn = document.createElement('button');
+    printBtn.textContent = "Imprimir hoja";
+    printBtn.style = "margin: 20px auto; display: block; background: #7b2c2c; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-size: 1.1em; cursor: pointer;";
+    printBtn.onclick = () => window.print();
+    document.querySelector('.container').appendChild(printBtn);
+  </script>
+</body>
+</html>
